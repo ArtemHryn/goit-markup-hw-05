@@ -291,8 +291,8 @@ button:focus, a:focus{
   left: 50%;
   width: 528px;
   height: 581px;
-  transform: translate(-50%, -50%);
-  transition: transform 250ms var(--animation), top 250ms var(--animation);
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 1250ms var(--animation);
 
   background-color: var(--white_color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -300,9 +300,7 @@ button:focus, a:focus{
 }
 
 .backdrop.is-hidden .modal {
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -50%) scale(0) rotateZ(360deg);
 }
 
 
