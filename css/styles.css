@@ -10,6 +10,7 @@
   --card_border: #eeeeee;
   --hero_background: #c4c4c4;
   --social-icon-color: #afb1b8;
+  --animation: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -48,6 +49,11 @@ ul {
 button {
   border: 0;
   padding: 0;
+}
+
+button:hover, a:hover,
+button:focus, a:focus{
+  transition: background-color 250ms var(--animation), color 250ms var(--animation), box-shadow 250ms var(--animation);
 }
 
 .visually-hidden {
@@ -111,6 +117,7 @@ button {
 }
 
 .navigation-list-item {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -122,6 +129,23 @@ button {
   line-height: 16px;
   letter-spacing: 0.02em;
   color: var(--main_color);
+}
+
+.navigation-list-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--web_hover_button_color);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform 250ms var(--animation);
+}
+
+.navigation-list-item:hover::after {
+  transform: scale(1);
 }
 
 /*mail and phone*/
@@ -185,6 +209,7 @@ button {
   height: 4px;
   background-color: var(--web_hover_button_color);
   border-radius: 2px;
+  transform: scaleX(1);
 }
 
 /* main part*/
@@ -245,6 +270,7 @@ button {
 /* Modal window */
 
 .backdrop.is-hidden {
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
 }
@@ -256,6 +282,7 @@ button {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.2);;
+  transition: opacity 250ms var(--animation), visibility 250ms var(--animation);
 }
 
 .modal {
@@ -265,11 +292,19 @@ button {
   width: 528px;
   height: 581px;
   transform: translate(-50%, -50%);
+  transition: transform 250ms var(--animation);
 
   background-color: var(--white_color);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 }
+
+.backdrop.is-hidden .modal {
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -100%);
+}
+
 
 .button-close {
   position: absolute;
@@ -279,7 +314,7 @@ button {
   align-items: center;
   justify-content: center;
 
-  background: #FFFFFF;
+  background: var(--white_color);
   border: 1px solid rgba(0, 0, 0, 0.1);
   width: 30px;
   height: 30px;
@@ -735,7 +770,6 @@ button {
 }
 
 .card-list-item-link {
-  position: relative;
   display: block;
   text-decoration: none;
 }
@@ -761,14 +795,19 @@ button {
   color: var(--mail_phone_desc);
 }
 
+.card-top-part {
+  position: relative;
+  overflow: hidden;
+}
 
 .card-text {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   padding: 63px 24px;
-  opacity: 0;
-  
+  transform: translateY(100%);
+  transition: transform 250ms var(--animation);
+
   font-weight: 400;
   font-size: 18px;
   line-height: 1.55;
@@ -778,5 +817,5 @@ button {
 }
 
 .card-list-item-link:hover .card-text {
-  opacity: 1;
+  transform: translateY(0);
 }
