@@ -814,6 +814,7 @@ button:focus, a:focus{
   background-color: rgba(33, 150, 243, 0.9);;
 }
 
-.card-list-item-link:hover .card-text {
+.card-list-item-link:hover .card-text,
+.card-list-item-link:focus .card-text {
   transform: translateY(0);
 }
